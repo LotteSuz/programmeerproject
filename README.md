@@ -4,7 +4,7 @@
 For this project I will build a web application for a gym. Future members can subscribe to a program, after which they can browse the timetable, subscribe for classes and shop products. The gym personnel can monitor members, class subscriptions and webshop orders.
 
 ## Requirements
-__ • Subscriptions __ The index page contains the 2 different kinds of subscriptions available, members can choose to join the gym and are redirected to registration.
+__• Subscriptions__ The index page contains the 2 different kinds of subscriptions available, members can choose to join the gym and are redirected to registration.//
 __• Register__ Users are able to register for 2 different kinds of subscriptions.
 __• Members__ Personnel can browse the memberbase, and for each member see their subscription.
 __• Login/Logout__ Members can login to get access to the timetable, and logout.
