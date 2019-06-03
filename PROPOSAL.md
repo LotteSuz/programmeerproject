@@ -6,9 +6,21 @@ YourGym is a cool new gym which offers free weights training and group lessons. 
 ## Solution
 A django written web application will enable people to subcsribe to YourGym, browse the timetable, enroll for classes and shop products. The gym personnel can monitor members, class subscriptions and webshop orders.
 
-![alt text][logo]
+### Index Page
+![alt text][yg1]
 
-[logo]: https://github.com/LotteSuz/programmeerproject/blob/master/images/YourGym1.png "Index Page"
+[yg1]: https://github.com/LotteSuz/programmeerproject/blob/master/images/YourGym1.png "Index Page"
+
+### Timetable
+![alt text][yg2]
+
+[yg2]: https://github.com/LotteSuz/programmeerproject/blob/master/images/YourGym2.png "Timetable"
+
+### Webshop
+![alt text][yg3]
+
+[yg3]: https://github.com/LotteSuz/programmeerproject/blob/master/images/YourGym3.png "Webshop"
+
 
 ## Features
 __• Subscriptions__ The index page contains the 2 different kinds of subscriptions available, where members can select the preferred program and are redirected to registration.
