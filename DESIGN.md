@@ -5,6 +5,8 @@
 
 [overview]: https://github.com/LotteSuz/programmeerproject/blob/master/images/overview.png "Overview Sketch"
 
+## Frameworks
+The django eventtools package will be used to handle the calendar function needed for the timetables at the gym schedule & personal schedule page. Documentation of this package: https://github.com/gregplaysguitar/django-eventtools
 
 ## Models
 
