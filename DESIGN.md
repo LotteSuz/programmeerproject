@@ -22,30 +22,30 @@ subscription      | CharField
 
 ### 2 | Timetable
 <pre>
-> name              | CharField \
-> instructor        | CharField \
-> datetime          | DateTimeField \
-> duration          | IntegerField \
-> max participants  | IntegerField
+name              | CharField
+instructor        | CharField
+datetime          | DateTimeField
+duration          | IntegerField
+max participants  | IntegerField
 </pre>
 
 ### 3 | Personal Schedule
 <pre>
-> username          | CharField \
-> lesson            | ManyToManyField (timetable)
+username          | CharField
+lesson            | ManyToManyField (timetable)
 </pre>
 
 ### 4 | Stock
 <pre>
-> name              | CharField \
-> color             | CharField \
-> price             | DecimalField \
-> description       | CharField \
-> amount            | IntegerField
+name              | CharField
+color             | CharField
+price             | DecimalField
+description       | CharField
+amount            | IntegerField
 </pre>
 
 ### 5 | Cart
 <pre>
-> username      | CharField \
-> item          | ManyToManyField (webshop)
+username      | CharField
+item          | ManyToManyField (webshop)
 </pre>
