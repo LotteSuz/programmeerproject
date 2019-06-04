@@ -7,7 +7,7 @@
 
 
 ## Models
-
+<pre>
 ### 1 | Users
 > username      | CharField \
 > email         | EmailField \
@@ -16,3 +16,4 @@
 > staff status  | BooleanField \
 > subscription  | CharField
 
+</pre>
