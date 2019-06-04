@@ -9,10 +9,10 @@
 ## Models
 
 ### 1 | Users
-> username      | CharField
-> email         | EmailField
-> first name    | CharField
-> last name     | CharField
-> staff status  | BooleanField
+> username      | CharField \
+> email         | EmailField \
+> first name    | CharField \
+> last name     | CharField \
+> staff status  | BooleanField \
 > subscription  | CharField
 
