@@ -9,17 +9,22 @@ A django written web application will enable people to subcsribe to YourGym, bro
 ### Index Page
 ![alt text][yg1]
 
-[yg1]: https://github.com/LotteSuz/programmeerproject/blob/master/images/YourGym1.png "Index Page"
+[yg1]: https://github.com/LotteSuz/programmeerproject/blob/master/images/index.png "Index Page"
 
-### Timetable
+### Subscriptions
 ![alt text][yg2]
 
-[yg2]: https://github.com/LotteSuz/programmeerproject/blob/master/images/YourGym2.png "Timetable"
+[yg2]: https://github.com/LotteSuz/programmeerproject/blob/master/images/subs.png "Timetable"
 
-### Webshop
+### Timetable
 ![alt text][yg3]
 
-[yg3]: https://github.com/LotteSuz/programmeerproject/blob/master/images/YourGym3.png "Webshop"
+[yg3]: https://github.com/LotteSuz/programmeerproject/blob/master/images/schedule.png "Timetable"
+
+### Webshop
+![alt text][yg4]
+
+[yg4]: https://github.com/LotteSuz/programmeerproject/blob/master/images/webshop.png "Webshop"
 
 ## Prerequisites
 __• Data sources__ No data sources will be used for this project.
@@ -31,13 +36,13 @@ __• Other Apps__ A comparable web application is that of Vondelgym (http://www
 __• Limitations__ Technical difficulties during this project can arise in granting members with different types of subscriptions, different kinds of possibilities. A way to overcome this could be adding a code to every member, representing their type of subscription and checking this code in different aspects of the application. Another difficult aspect is keeping track of the stock of the webshop items. It should be well taken care of that the stock decreases after an order, furthermore it should possible to change the stock manually.
 
 ## Features
-__• Subscriptions__ The index page contains the 2 different kinds of subscriptions available, where members can select the preferred program and are redirected to registration.
+__• Subscriptions__ Members can select the preferred of 2 subscriptions and are redirected to registration.
 
 __• Register__ Users are able to register for 2 different kinds of subscriptions.
 
-__• Members__ Personnel can browse the memberbase, and for each member see their subscription and classes they are currently enrolled for.
+__• Members__ Personnel can browse the memberbase, check out which members enrolled for classes and see pending orders.
 
-__• Login/Logout__ Members can login to get access to the timetable and their shoppingcart, and logout.
+__• Login/Logout__ Members can login to get access to enrolling for classes and their shoppingcart, and logout.
 
 __• Webshop__ The webshop is available to members as well as visitors who can order with a guest account. Personnel can edit the amount of stock available for purchase.
 
