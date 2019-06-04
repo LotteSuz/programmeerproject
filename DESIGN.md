@@ -46,6 +46,6 @@ amount            | IntegerField
 
 ### 5 | Cart
 <pre>
-username      | CharField
-item          | ManyToManyField (webshop)
+username          | CharField
+item              | ManyToManyField (webshop)
 </pre>
