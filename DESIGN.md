@@ -12,12 +12,12 @@ The django eventtools package will be used to handle the calendar function neede
 
 ### 1 | Users
 <pre>
-> username          | CharField \
-> email             | EmailField \
-> first name        | CharField \
-> last name         | CharField \
-> staff status      | BooleanField \
-> subscription      | CharField
+username          | CharField
+email             | EmailField
+first name        | CharField
+last name         | CharField
+staff status      | BooleanField
+subscription      | CharField
 </pre>
 
 ### 2 | Timetable
