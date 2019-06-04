@@ -1,6 +1,6 @@
-# DESIGN
+# Design
 
-### Index Page
-![alt text][yg1]
+## Sketches
+![alt text][overview]
 
-[yg1]: https://github.com/LotteSuz/programmeerproject/blob/master/images/index.png "Index Page"
+[overview]: https://github.com/LotteSuz/programmeerproject/blob/master/images/overview.png "Overview Sketch"
