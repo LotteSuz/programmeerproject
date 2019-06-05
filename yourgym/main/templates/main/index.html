@@ -1,4 +1,18 @@
 {% extends "main/layout.html" %}
 
 {% block title %}{% endblock %}
-{% block main %} {{pastas}} {% endblock %}
+{% block main %}
+<div class="container">
+  <div class="row" id="toprow">
+    <div id="indextitle" class="col-md-3 offset-md-1"> YourGym. </div>
+  </div>
+  <div class="row">
+    <div id="indextitle" class="col offset-md-1">
+      <a class="btn btn-outline-light" href="{% url 'shop'%}"> Shop </a>
+      <a class="btn btn-outline-light" href="{% url 'timetable'%}"> Timetable </a>
+      <a class="btn btn-outline-light" href="{% url 'subscriptions'%}"> Subscriptions </a>
+    </div>
+  </div>
+</div>
+<img src="static/main/kettlebell.png" id="kettlebell">
+{% endblock %}

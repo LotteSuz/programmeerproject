@@ -8,4 +8,21 @@ body {
   padding-top: 70px;
 }
 
+#kettlebell {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+.container #toprow {
+  padding-top: 250px;
+}
+.container #toprow #indextitle {
+  font-size: 60px;
+}
+
+#navtitle {
+  color: #6c6c6c;
+}
+
 /*# sourceMappingURL=stylesheet.css.map */

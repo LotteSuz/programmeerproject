@@ -10,3 +10,21 @@ body{
   color: $text;
   padding-top: 70px;
 }
+
+#kettlebell {
+  position: absolute;
+  bottom:0;
+  right:0;
+}
+
+.container{
+  #toprow{
+    #indextitle {
+      font-size: 60px;
+    }
+    padding-top: 250px;
+  }
+}
+#navtitle {
+    color: #6c6c6c;
+}

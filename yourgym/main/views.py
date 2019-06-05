@@ -7,10 +7,7 @@ from django.contrib.auth.decorators import user_passes_test
 
 # Create your views here.
 def index(request):
-    context = {
-        "pastas": "this is the index page",
-    }
-    return render(request, "main/index.html", context)
+    return render(request, "main/index.html")
 
 def shop(request):
     context = {
