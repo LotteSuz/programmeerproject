@@ -5,3 +5,6 @@ Today I wrote the project proposal. I decided customers who aren't a member of t
 
 ## Day 2
 Today I worked on the design of my webapp, sketched the association between different parts of the application and set up the models' structure. For the prototype I decided to focus on the django eventtools framework and on the difference in user types (personnel, guests, members without group lessons, members with group lessons) and the consequences this type has on the functionality and interface of the webapp.
+
+## Day 3
+Today I set up the project, created all necessary html pages and linked them to eachother. I asked feedback about the feature where non-members can order from the shop as well, and both Lars and Nils adviced me to register guests with name and emailadress only, instead of a regular member account. I then worked on the index page and scss.
