@@ -8,3 +8,6 @@ Today I worked on the design of my webapp, sketched the association between diff
 
 ## Day 3
 Today I set up the project, created all necessary html pages and linked them to eachother. I asked feedback about the feature where non-members can order from the shop as well, and both Lars and Nils adviced me to register guests with name and emailadress only, instead of a regular member account. I then worked on the index page and scss.
+
+## Day 4
+During the standup we discussed possible problems/bottlenecks for the coming weeks of development. Nils and Lars agreed that the calendar function could be difficult to implement, which I why I will begin working on this today. Furthemore, the option to shop as a guest could be timecostly as well, therefore this is the first thing on my to do list for next week.
