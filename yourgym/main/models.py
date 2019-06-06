@@ -9,3 +9,7 @@ class Event(models.Model):
     end_time = models.DateTimeField()
     duration = models.IntegerField()
     display_time = models.TimeField(null=True)
+
+class Stock(models.Model):
+    description = models.CharField(max_length=255, blank=True)
+    document = models.FileField(upload_to='documents/', default=None)

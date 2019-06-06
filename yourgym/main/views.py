@@ -10,7 +10,7 @@ from django.utils.safestring import mark_safe
 import calendar
 
 from .models import *
-from .utils import Calendar
+from .utils import Calendar, DocumentForm
 
 # Create your views here.
 def index(request):
@@ -18,7 +18,7 @@ def index(request):
 
 def shop(request):
     context = {
-        "pastas": "this is the shop",
+        "items": Stock.objects.all(),
     }
     return render(request, "main/shop.html", context)
 
@@ -58,7 +58,7 @@ class CalendarView(generic.ListView):
 
         # Instantiate our calendar class with today's year and date
         cal = Calendar(d.year, d.month)
-        
+
         # Call the formatmonth method, which returns our calendar as a table
         html_cal = cal.formatmonth(withyear=True)
         context['calendar'] = mark_safe(html_cal)
@@ -84,3 +84,15 @@ def next_month(d):
     next_month = last + timedelta(days=1)
     month = 'month=' + str(next_month.year) + '-' + str(next_month.month)
     return month
+
+def stock(request):
+    if request.method == 'POST':
+        form = DocumentForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('index')
+    else:
+        form = DocumentForm()
+    return render(request, 'main/stock.html', {
+        'form': form
+    })

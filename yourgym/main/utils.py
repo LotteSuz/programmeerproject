@@ -1,6 +1,8 @@
 from datetime import datetime, timedelta
 from calendar import HTMLCalendar
 from .models import Event
+from django import forms
+from .models import Stock
 
 class Calendar(HTMLCalendar):
 	def __init__(self, year=None, month=None):
@@ -38,3 +40,8 @@ class Calendar(HTMLCalendar):
 		for week in self.monthdays2calendar(self.year, self.month):
 			cal += f'{self.formatweek(week, events)}\n'
 		return cal
+
+class DocumentForm(forms.ModelForm):
+    class Meta:
+        model = Stock
+        fields = ('description', 'document', )
