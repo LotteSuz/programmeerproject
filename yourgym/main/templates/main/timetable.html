@@ -1,4 +1,11 @@
 {% extends "main/layout.html" %}
+{% block style%} <link rel="stylesheet" href="static/main/stylesheetcal.css">{% endblock %}
 
 {% block title %}{% endblock %}
-{% block main %}{{pastas}} {% endblock %}
+{% block main %}
+    <div class="clearfix">
+    	<a class="btn btn-outline-light left" href="{% url 'timetable'%}?{{ prev_month }}"> Previous Month </a>
+    	<a class="btn btn-outline-light right" href="{% url 'timetable'%}?{{ next_month }}"> Next Month </a>
+    </div>
+    {{calendar}}
+{% endblock %}
