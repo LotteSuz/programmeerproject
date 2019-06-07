@@ -12,4 +12,4 @@ class Event(models.Model):
 
 class Stock(models.Model):
     description = models.CharField(max_length=255, blank=True)
-    document = models.FileField(upload_to='documents/', default=None)
+    document = models.FileField(upload_to='main/documents/', default=None)
