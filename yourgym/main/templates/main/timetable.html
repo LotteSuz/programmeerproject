@@ -1,11 +1,32 @@
-{% extends "main/layout.html" %}
-{% block style%} <link rel="stylesheet" href="static/main/stylesheetcal.css">{% endblock %}
+<!DOCTYPE html>
+<html lang='en'>
+  <head>
+    <meta charset='utf-8' />
 
-{% block title %}{% endblock %}
-{% block main %}
-    <div class="clearfix">
-    	<a class="btn btn-outline-light left" href="{% url 'timetable'%}?{{ prev_month }}"> Previous Month </a>
-    	<a class="btn btn-outline-light right" href="{% url 'timetable'%}?{{ next_month }}"> Next Month </a>
-    </div>
-    {{calendar}}
-{% endblock %}
+    <link href='static/main/calendar/core/main.css' rel='stylesheet' />
+    <link href='static/main/calendar/daygrid/main.css' rel='stylesheet' />
+
+    <script src='static/main/calendar/core/main.js'></script>
+    <script src='static/main/calendar/daygrid/main.js'></script>
+
+    <script>
+
+      document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+          plugins: [ 'dayGrid' ],
+          defaultView: 'dayGridDay'
+        });
+
+        calendar.render();
+      });
+
+    </script>
+  </head>
+  <body>
+
+    <div id='calendar'></div>
+
+  </body>
+</html>
