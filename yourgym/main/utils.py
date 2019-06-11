@@ -8,4 +8,4 @@ from .models import Stock
 class DocumentForm(forms.ModelForm):
     class Meta:
         model = Stock
-        fields = ('description', 'document', )
+        fields = ('description', 'document', 'price', 'available', 'color' )

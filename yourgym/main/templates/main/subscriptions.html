@@ -1,4 +1,29 @@
 {% extends "main/layout.html" %}
+{% block style%} <link rel="stylesheet" href="static/main/stylesheetsub.css">{% endblock %}
 
-{% block title %}{% endblock %}
-{% block main %}{{pastas}} {% endblock %}
+
+{% block title %} Subscriptions {% endblock %}
+
+{% block main %}
+
+<form class="m-5" action="{% url 'register' %}" method="get">
+    {% csrf_token %}
+  <div class="container">
+    <div class="row justify-content-md-center">
+      {% for sub in subscriptions %}
+      <div class="col-4">
+        <img src="{{ sub.visual.url }}" width="200px" height="200px">
+        <br> <br> <br>
+        <a class="descr"> {{sub.title}} <a>
+        <br><br>
+        <a> {{sub.description}} <a>
+        <br> <br>
+        <a> ${{sub.price_month}}</a>
+        <br>
+        <br>
+        <button class="btn btn-outline-light" name=subtype type="submit" value="{{sub.title}}"> Choose </button>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+{% endblock %}

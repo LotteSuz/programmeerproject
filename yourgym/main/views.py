@@ -36,28 +36,56 @@ def schedule(request):
 
 def subscriptions(request):
     context = {
-        "pastas": "these are the subscriptions",
+        "subscriptions": Subscription.objects.all(),
     }
     return render(request, "main/subscriptions.html", context)
 
 def register(request):
-    context = {
-        "pastas": "this is the register page",
-    }
-    return render(request, "main/register.html", context)
+    if request.method == "POST":
+        first_name = request.POST["first_name"]
+        last_name = request.POST["last_name"]
+        username = request.POST["username"]
+        email = request.POST["email"]
+        password = request.POST["password"]
+        password2 = request.POST["password2"]
+        subscription = request.GET["subscription"]
+
+        if not request.POST["first_name"] or not request.POST["last_name"] or not request.POST["username"]:
+            return render(request, "register.html", {"message":"You must provide a full name and username."})
+        elif not request.POST["email"]:
+            return render(request, "register.html", {"message":"You must provide an emailadress."})
+        elif not request.POST["password"] or not request.POST["password2"]:
+            return render(request, "register.html", {"message":"You must provide a password."})
+        elif not password == password2:
+            return render(request, "register.html", {"message":"Your password and confirmation should be the same."})
+
+        if User.objects.filter(email=email).exists():
+             return render(request, "register.html", {"message":"An account with this emailadress already exists, please log in."})
+
+        user = User.objects.create_user(username, email, password)
+        user.first_name = first_name
+        user.last_name = last_name
+        user.save()
+        return redirect('index')
+    else:
+        type = request.GET["subtype"]
+        context = {
+            "subscription_type" : type
+        }
+        return render(request, "main/register.html", context)
 
 def timetable(request):
     context = {
-        "pastas": "this is the calendar page",
+        "workouts": Event.objects.all(),
     }
     return render(request, "main/timetable.html", context)
 
 def stock(request):
     if request.method == 'POST':
-        form = DocumentForm(request.POST, request.FILES)
+        form = DocumentForm(request.POST, request.FILES, request.POST, request.POST, request.POST)
         if form.is_valid():
             form.save()
-            return redirect('index')
+            return redirect('shop')
     else:
         form = DocumentForm()
     return render(request, 'main/stock.html', {

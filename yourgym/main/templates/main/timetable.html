@@ -8,25 +8,38 @@
 
     <script src='static/main/calendar/core/main.js'></script>
     <script src='static/main/calendar/daygrid/main.js'></script>
-
     <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var calendarEl = document.getElementById('calendar');
 
-      document.addEventListener('DOMContentLoaded', function() {
-        var calendarEl = document.getElementById('calendar');
+      var calendar = new FullCalendar.Calendar(calendarEl, {
+        plugins: [ 'interaction', 'dayGrid', 'timeGrid' ],
+        defaultView: 'dayGridWeek',
+        defaultDate: '2019-06-07',
+        header: {
+          left: 'prev,next today',
+          center: 'title',
+          right: 'dayGridMonth,timeGridWeek,timeGridDay'
+        },
+        events: [
+          {
+              title: '{{workouts.title}}',
+              start: '2019-06-12T12:00:00'
+          }
 
-        var calendar = new FullCalendar.Calendar(calendarEl, {
-          plugins: [ 'dayGrid' ],
-          defaultView: 'dayGridDay'
-        });
-
-        calendar.render();
+        ]
       });
+
+      calendar.render();
+    });
 
     </script>
   </head>
-  <body>
 
+  <body>
     <div id='calendar'></div>
 
   </body>
+
+
 </html>

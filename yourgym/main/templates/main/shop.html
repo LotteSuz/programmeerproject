@@ -9,8 +9,14 @@
   <div class="row">
     {% for item in items %}
     <div class="col-4">
-      <img src="{{ item.document.url }}">
-      {{item.description}}
+      <img src="{{ item.document.url }}" width="200px" height="200px">
+      <br> <br> <br>
+      <a class="descr"> {{item.description}} <a>
+      <br> <br>
+      <a> ${{item.price}}</a>
+      <br>
+      <a> {{item.available}}pc Available </a>
+      <br>
       <a class="btn btn-outline-light" href="{% url 'index'%}"> Add to cart </a>
     </div>
     {% endfor %}
