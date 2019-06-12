@@ -11,3 +11,12 @@ Today I set up the project, created all necessary html pages and linked them to 
 
 ## Day 4
 During the standup we discussed possible problems/bottlenecks for the coming weeks of development. Nils and Lars agreed that the calendar function could be difficult to implement, which I why I will begin working on this today. Furthemore, the option to shop as a guest could be timecostly as well, therefore this is the first thing on my to do list for next week.
+
+## Day 5
+For todays meeting we sat down with our tech assistent and gave a short tour through our app so far. Marijn suggested to use a different framework for the calendar function, which I spend the rest of the day on. I decided to go with the fullcalendar.io framework because this calendar had more different views (day/week/month) and mainly relies on javascript instead of python, which makes it easier to adjust. Marijn agreed that the calendar and extending the user model are aspects that need priority next week.
+
+## Day 6
+Today I continued working on the calendar, which turned out to be a timecostly part of this project. I had trouble implementing switching views and adding events, therefore I decided to leave this for now and ask help from Marijn tomorrow. I started working on the webshop & cart functions, and focused on the models I need for this.
+
+## Day 7
+With help of Marijn the calendar view can be switched now (between day, week and month). For the webshop and subscriptions functionality, the user model needed to be customized which was had far-reaching effects. From this experience and the django documentation I used for this I learned that this step is best done at the beginning of a new project, which I will take with me for future works.
