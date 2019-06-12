@@ -1,0 +1,20 @@
+{% extends "main/layout.html"%}
+
+{% block title %} Login {% endblock %}
+{% block main %}
+{% if message %}
+    <div class="text-center">
+        {{message}}
+    </div>
+{% endif %}
+<form class="m-5" action="{% url 'login_view' %}" method="post">
+  {% csrf_token %}
+    <div class="form-group">
+        <input type="text" class="form-control" placeholder="Username" name="username">
+    </div>
+    <div class="form-group">
+        <input type="password" class="form-control" placeholder="Password" name="password">
+    </div>
+    <button type="submit" class="btn btn-primary">Log In</button>
+</form>
+{% endblock %}

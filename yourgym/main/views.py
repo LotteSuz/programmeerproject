@@ -1,6 +1,5 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
-from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
 from django.contrib.auth.decorators import user_passes_test
@@ -23,10 +22,49 @@ def shop(request):
     return render(request, "main/shop.html", context)
 
 def cart(request):
-    context = {
-        "pastas": "this is the shoppingcart",
-    }
-    return render(request, "main/cart.html", context)
+    if request.method == "POST":
+        product = request.POST["productname"]
+        curruser = request.user
+        try:
+            item = Cart.objects.filter(user=curruser).get(item=product)
+            item.amount = int(item.amount) + 1
+            item.save()
+        except:
+            item = Stock.objects.get(name=product)
+            amount = 1
+            new = Cart(user=curruser, item=item.description, price=item.price, amount=amount)
+            new.save()
+        total = 0
+        qty = 0
+        products = Cart.objects.filter(user=curruser)
+        for item in products:
+            amount += item.amount
+            total += item.price
+        context = {
+            "products": products,
+            "user": curruser,
+            "total": total,
+            "qty": qty
+        }
+        return render(request, "main/cart.html", context)
+    else:
+        curruser = request.user
+        total = 0
+        qty = 0
+        products = Cart.objects.filter(user=curruser)
+        for item in products:
+            qty += 1
+            total += item.price
+        context = {
+            "products": products,
+            "user": curruser,
+            "total": total,
+            "qty": qty
+        }
+        return render(request, "main/cart.html", context)
+
+def order(request):
+    return redirect('index')
 
 def schedule(request):
     context = {
@@ -48,7 +86,6 @@ def register(request):
         email = request.POST["email"]
         password = request.POST["password"]
         password2 = request.POST["password2"]
-        subscription = request.GET["subscription"]
 
         if not request.POST["first_name"] or not request.POST["last_name"] or not request.POST["username"]:
             return render(request, "register.html", {"message":"You must provide a full name and username."})
@@ -60,13 +97,13 @@ def register(request):
             return render(request, "register.html", {"message":"Your password and confirmation should be the same."})
 
         if User.objects.filter(email=email).exists():
-             return render(request, "register.html", {"message":"An account with this emailadress already exists, please log in."})
+             return render(request, "main/login.html", {"message":"An account with this emailadress already exists, please log in."})
 
         user = User.objects.create_user(username, email, password)
         user.first_name = first_name
         user.last_name = last_name
         user.save()
-        return redirect('index')
+        return render(request, "main/login.html", {"message":"Registered. You can log in now."})
     else:
         type = request.GET["subtype"]
         context = {
@@ -91,3 +128,21 @@ def stock(request):
     return render(request, 'main/stock.html', {
         'form': form
     })
+
+def login_view(request):
+    if request.method == "POST":
+        username = request.POST["username"]
+        password = request.POST["password"]
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return HttpResponseRedirect(reverse("index"))
+        else:
+            return render(request, "main/login.html", {"message": "Invalid credentials."})
+    else:
+        return render(request, "main/login.html")
+
+
+def logout_view(request):
+    logout(request)
+    return render(request, "main/login.html", {"message": "Logged out."})
