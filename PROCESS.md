@@ -19,4 +19,7 @@ For todays meeting we sat down with our tech assistent and gave a short tour thr
 Today I continued working on the calendar, which turned out to be a timecostly part of this project. I had trouble implementing switching views and adding events, therefore I decided to leave this for now and ask help from Marijn tomorrow. I started working on the webshop & cart functions, and focused on the models I need for this.
 
 ## Day 7
-With help of Marijn the calendar view can be switched now (between day, week and month). For the webshop and subscriptions functionality, the user model needed to be customized which was had far-reaching effects. From this experience and the django documentation I used for this I learned that this step is best done at the beginning of a new project, which I will take with me for future works.
+With help of Marijn the calendar view can be switched now (between day, week and month). For the webshop and subscriptions functionality, the user model needed to be customized which was had far-reaching effects. From this experience and the django documentation I used for this I learned that this step is best done at the beginning of a new project, which I will take with me for future works. During out standup, we discussed which styleguide we would adhere to.
+
+## Day 8
+Today I finished the registration, and worked on the webshop which still has some bugs. With our stand-up team we further discussed the styleguide, which I processed in STYLE.md.
