@@ -4,7 +4,9 @@
 {% block main %}
 <form class="m-5" action="{% url 'register' %}" method="post">
   {% csrf_token %}
-  <div> You are registering for the <button value="{{subscription_type}}" name="subscription" disabled> {{subscription_type}} </button> subscription </div>
+  <div class="form-group"> You are registering for the
+    <button disabled> {{subscription_type}} </button>
+     subscription </div>
   <br>
     <div class="form-group">
         <input type="text" class="form-control" placeholder="First Name" name="first_name">
@@ -24,6 +26,6 @@
     <div class="form-group">
         <input type="password" class="form-control transparent-input" placeholder="Confirm Password" name="password2">
     </div>
-    <button type="submit" class="btn btn-outline-light">Register</button>
+    <button type="submit" name="subscription" value="{{subscription_type}}" class="btn btn-outline-light">Register</button>
 </form>
 {% endblock %}

@@ -4,7 +4,8 @@
 
 {% block title %}{% endblock %}
 {% block main %}
-
+<form class="m-5" action="{% url 'cart' %}" method="post">
+    {% csrf_token %}
 <div class="container">
   <div class="row">
     {% for item in items %}
@@ -17,9 +18,10 @@
       <br>
       <a> {{item.available}}pc Available </a>
       <br>
-      <a class="btn btn-outline-light" value={{item.description}} name=productname href="{% url 'cart'%}"> Add to cart </a>
+      <button type="post" class="btn btn-outline-light" value={{item.description}} name=productname href="{% url 'cart'%}"> Add to cart </button>
     </div>
     {% endfor %}
   </div>
 </div>
+</form>
 {% endblock %}

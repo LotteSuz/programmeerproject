@@ -26,14 +26,15 @@ def cart(request):
         product = request.POST["productname"]
         curruser = request.user
         try:
-            item = Cart.objects.filter(user=curruser).get(item=product)
+            item = Cart.objects.filter(user=curruser).get(description=product)
             item.amount = int(item.amount) + 1
             item.save()
         except:
-            item = Stock.objects.get(name=product)
+            item = Stock.objects.get(description=product)
             amount = 1
             new = Cart(user=curruser, item=item.description, price=item.price, amount=amount)
             new.save()
+        print('post')
         total = 0
         qty = 0
         products = Cart.objects.filter(user=curruser)
@@ -46,6 +47,7 @@ def cart(request):
             "total": total,
             "qty": qty
         }
+        print(qty)
         return render(request, "main/cart.html", context)
     else:
         curruser = request.user
@@ -61,6 +63,7 @@ def cart(request):
             "total": total,
             "qty": qty
         }
+        print(qty)
         return render(request, "main/cart.html", context)
 
 def order(request):
@@ -86,6 +89,8 @@ def register(request):
         email = request.POST["email"]
         password = request.POST["password"]
         password2 = request.POST["password2"]
+        subscription = request.POST["subscription"]
+        print(f"subscription1 = {subscription}")
 
         if not request.POST["first_name"] or not request.POST["last_name"] or not request.POST["username"]:
             return render(request, "register.html", {"message":"You must provide a full name and username."})
@@ -99,9 +104,11 @@ def register(request):
         if User.objects.filter(email=email).exists():
              return render(request, "main/login.html", {"message":"An account with this emailadress already exists, please log in."})
 
+        access = Subscription.objects.get(title=subscription).grouplessons
         user = User.objects.create_user(username, email, password)
         user.first_name = first_name
         user.last_name = last_name
+        user.lesson_access = access
         user.save()
         return render(request, "main/login.html", {"message":"Registered. You can log in now."})
     else:
