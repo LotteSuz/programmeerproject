@@ -1,4 +1,4 @@
-Personal Style Guide
+# Personal Style Guide
 
 ## Reference
 For style I will adhere to the guidelines of pep8, and use their tool 'pycodestyle' to check for style mistakes.
