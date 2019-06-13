@@ -5,6 +5,7 @@ For style I will adhere to the guidelines of pep8, and use their tool 'pycodesty
 https://www.python.org/dev/peps/pep-0008/
 
 ## Summary
+<pre>
 • Comments
 no inline comments
 begin with a  # followed by a space and capitalized first letter
@@ -40,5 +41,7 @@ modularity
 • Patterns to be avoided.
 copying code
 repeating
+
+</pre>
 
 
