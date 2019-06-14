@@ -23,3 +23,6 @@ With help of Marijn the calendar view can be switched now (between day, week and
 
 ## Day 8
 Today I finished the registration, and worked on the webshop which still has some bugs. With our stand-up team we further discussed the styleguide, which I processed in STYLE.md.
+
+## Day 9
+During our team meeting Marijn gave me feedback for my model structure for the webshop. I decided to create my own manytomany model, and began restoring the webshop functionality using these models.
