@@ -18,7 +18,7 @@
       <br>
       <a> {{item.available}}pc Available </a>
       <br>
-      <button type="post" class="btn btn-outline-light" value={{item.description}} name=productname href="{% url 'cart'%}"> Add to cart </button>
+      <button type="post" class="btn btn-outline-light" value="{{item.product_number}}" name="productnumber" href="{% url 'cart'%}"> Add to cart </button>
     </div>
     {% endfor %}
   </div>

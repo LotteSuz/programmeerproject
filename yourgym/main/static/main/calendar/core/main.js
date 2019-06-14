@@ -18,7 +18,7 @@ Docs & License: https://fullcalendar.io/
     };
     var containerTagHash = {
         '<tr': 'tbody',
-        '<td': 'tr'
+        '<tyd': 'tr'
     };
     function createElement(tagName, attrs, content) {
         var el = document.createElement(tagName);

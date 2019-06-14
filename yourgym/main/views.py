@@ -23,47 +23,37 @@ def shop(request):
 
 def cart(request):
     if request.method == "POST":
-        product = request.POST["productname"]
+        prodnum = request.POST["productnumber"]
+        item = Stock.objects.get(product_number=prodnum)
         curruser = request.user
-        try:
-            item = Cart.objects.filter(user=curruser).get(description=product)
-            item.amount = int(item.amount) + 1
-            item.save()
-        except:
-            item = Stock.objects.get(description=product)
-            amount = 1
-            new = Cart(user=curruser, item=item.description, price=item.price, amount=amount)
-            new.save()
-        print('post')
-        total = 0
-        qty = 0
-        products = Cart.objects.filter(user=curruser)
-        for item in products:
-            amount += item.amount
-            total += item.price
+        usercart = Cart.objects.filter(user=curruser).first()
+        print(usercart)
+        if usercart == None:
+            usercart = Cart(user=curruser)
+            usercart.save()
+            usercart.item.set(product_number=prodnum)
+            usercart.save()
+        else:
+            pass
+            # if product
+                # change amount
+            # else
+                # add product
         context = {
-            "products": products,
+            "products": "products",
             "user": curruser,
-            "total": total,
-            "qty": qty
+            "total": 10,
+            "qty": 2
         }
-        print(qty)
         return render(request, "main/cart.html", context)
     else:
         curruser = request.user
-        total = 0
-        qty = 0
-        products = Cart.objects.filter(user=curruser)
-        for item in products:
-            qty += 1
-            total += item.price
         context = {
-            "products": products,
+            "products": "products",
             "user": curruser,
-            "total": total,
-            "qty": qty
+            "total": 10,
+            "qty": 2
         }
-        print(qty)
         return render(request, "main/cart.html", context)
 
 def order(request):

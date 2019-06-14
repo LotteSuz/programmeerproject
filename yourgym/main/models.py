@@ -15,11 +15,15 @@ class Event(models.Model):
     duration = models.IntegerField()
 
 class Stock(models.Model):
+    product_number = models.IntegerField(null=True, blank=True, unique=True)
     description = models.CharField(max_length=255, blank=True)
     document = models.ImageField(upload_to='images/', default=None)
     price = models.DecimalField(decimal_places=2, max_digits=6, null=True, blank=True)
     available = models.IntegerField(default=None, blank=True)
     color = models.CharField(max_length=255, blank=True)
+
+    def __str__(self):
+        return self.description
 
 class Subscription(models.Model):
     title = models.CharField(max_length=200)
@@ -30,6 +34,9 @@ class Subscription(models.Model):
 
 class Cart(models.Model):
     user = models.CharField(max_length=64)
-    item = models.CharField(max_length=64)
-    price = models.DecimalField(decimal_places=2, max_digits=4, default=0)
-    amount = models.IntegerField(default=None, blank=True)
+    item = models.ManyToManyField(Stock, through='CartItems', through_fields=('cart', 'item'))
+
+class CartItems(models.Model):
+    item = models.ForeignKey(Stock, on_delete=models.CASCADE)
+    cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
+    amount = models.IntegerField(default=1)
