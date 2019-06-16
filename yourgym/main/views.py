@@ -26,33 +26,53 @@ def cart(request):
         prodnum = request.POST["productnumber"]
         item = Stock.objects.get(product_number=prodnum)
         curruser = request.user
-        usercart = Cart.objects.filter(user=curruser).first()
-        print(usercart)
+        usercart = Cart.objects.filter(owner=curruser).first()
         if usercart == None:
-            usercart = Cart(user=curruser)
-            usercart.save()
-            usercart.item.set(product_number=prodnum)
-            usercart.save()
+            newcart = Cart(owner=curruser)
+            newcart.save()
+            newcartitem = CartItem(item=item, cartowner=newcart, price=item.price, amount=1)
+            newcartitem.save()
         else:
-            pass
-            # if product
-                # change amount
-            # else
-                # add product
+            cartitem = CartItem.objects.filter(cartowner=usercart, item=item).count()
+            if cartitem == 0:
+                newcartitem = CartItem(item=item, cartowner=usercart, price=item.price, amount=1)
+                newcartitem.save()
+            else:
+                currcartitem = CartItem.objects.filter(cartowner=usercart).get(item=item)
+                curramount = currcartitem.amount
+                newamount = int(curramount) + 1
+                currcartitem.amount = newamount
+                currcartitem.save()
+
+        products = CartItem.objects.filter(cartowner=usercart).all()
+        total = 0
+        qty = 0
+        for product in products:
+            qty += product.amount
+            cost = product.amount * product.price
+            total += cost
         context = {
-            "products": "products",
+            "products": products,
             "user": curruser,
-            "total": 10,
-            "qty": 2
+            "total": total,
+            "qty": qty
         }
         return render(request, "main/cart.html", context)
     else:
         curruser = request.user
+        usercart = Cart.objects.filter(owner=curruser).first()
+        products = CartItem.objects.filter(cartowner=usercart).all()
+        total = 0
+        qty = 0
+        for product in products:
+            qty += product.amount
+            cost = product.amount * product.price
+            total += cost
         context = {
-            "products": "products",
+            "products": products,
             "user": curruser,
-            "total": 10,
-            "qty": 2
+            "total": total,
+            "qty": qty
         }
         return render(request, "main/cart.html", context)
 

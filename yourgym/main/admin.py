@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import Event, Stock, Subscription, Cart, User, CartItems
+from .models import Event, Stock, Subscription, Cart, User, CartItem
 from .utils import CustomUserChangeForm, CustomUserCreationForm
 
 class CustomUserAdmin(UserAdmin):
@@ -11,12 +11,12 @@ class CustomUserAdmin(UserAdmin):
                                     ('Access to group lessons', {'fields': ('lesson_access',)}),
     )
 
-class CartItemsInLine(admin.TabularInline):
-    model = CartItems
+class CartItemInLine(admin.TabularInline):
+    model = CartItem
     extra = 1
 
 class CartAdmin(admin.ModelAdmin):
-    inlines = (CartItemsInLine,)
+    inlines = (CartItemInLine,)
 
 # Register your models here.
 admin.site.register(Event)

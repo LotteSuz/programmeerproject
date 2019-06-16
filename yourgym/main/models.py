@@ -33,10 +33,11 @@ class Subscription(models.Model):
     grouplessons = models.BooleanField(default=False)
 
 class Cart(models.Model):
-    user = models.CharField(max_length=64)
-    item = models.ManyToManyField(Stock, through='CartItems', through_fields=('cart', 'item'))
+    owner = models.CharField(max_length=64)
+    items = models.ManyToManyField(Stock, through='CartItem', related_name='itemtype')
 
-class CartItems(models.Model):
-    item = models.ForeignKey(Stock, on_delete=models.CASCADE)
-    cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
+class CartItem(models.Model):
+    item = models.ForeignKey(Stock, on_delete=models.CASCADE, related_name='cart')
+    cartowner = models.ForeignKey(Cart, on_delete=models.CASCADE, related_name='cart')
+    price = models.DecimalField(decimal_places=2, max_digits=6, default=0)
     amount = models.IntegerField(default=1)
