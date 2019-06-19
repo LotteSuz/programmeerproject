@@ -26,3 +26,12 @@ Today I finished the registration, and worked on the webshop which still has som
 
 ## Day 9
 During our team meeting Marijn gave me feedback for my model structure for the webshop. I decided to create my own manytomany model, and began restoring the webshop functionality using these models.
+
+## Day 10
+My biggest priority for this week is to finish the webshop (today), and to display events from my model in the calendar. Members should be able to enroll for these events and get an overview of classes they plan to attend to. During the standup the others agreed the calendar functionality will be the biggest challenge, because there is little documentation on fullcalendar in combination with django.
+
+## Day 11
+Today I looked up documentation on how to display events in the calendar. I decided to use a buildin function with django, but unfortunately this did not work. The others could not help me with this, since they had no experience with fullcalendar.
+
+## Day 12
+With help of Marijn I finally managed to display events in the calendar. After getting this to work, it was easier to implement other functions around the events. Members can now select a class, enroll for it, and see their personal overview of classes. There is still some finetuning to do, but the most important aspects of the calendar work now.
