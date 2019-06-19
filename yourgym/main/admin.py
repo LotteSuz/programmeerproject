@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import Event, Stock, Subscription, Cart, User, CartItem
+from .models import Event, Stock, Subscription, Cart, User, CartItem, Order, Participant
 from .utils import CustomUserChangeForm, CustomUserCreationForm
 
 class CustomUserAdmin(UserAdmin):
@@ -21,6 +21,8 @@ class CartAdmin(admin.ModelAdmin):
 # Register your models here.
 admin.site.register(Event)
 admin.site.register(Stock)
+admin.site.register(Order)
+admin.site.register(Participant)
 admin.site.register(Subscription)
 admin.site.register(Cart, CartAdmin)
 admin.site.register(User, CustomUserAdmin)

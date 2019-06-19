@@ -13,5 +13,10 @@ urlpatterns = [
     path("stock", views.stock, name="stock"),
     path("order", views.order, name="order"),
     path("login", views.login_view, name="login_view"),
-    path("logout", views.logout_view, name="logout_view")
+    path("logout", views.logout_view, name="logout_view"),
+    path("orders", views.orders, name="orders"),
+    path("ordercomplete/<str:user>", views.ordercomplete, name="ordercomplete"),
+    path("events", views.events, name="events"),
+    path("enroll", views.enroll, name="enroll"),
+    path("yourevents", views.yourevents, name="yourevents")
 ]

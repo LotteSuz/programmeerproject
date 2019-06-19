@@ -1,4 +1,77 @@
 {% extends "main/layout.html" %}
+{% block style %}
 
-{% block title %}{% endblock %}
-{% block main %}{{pastas}} {% endblock %}
+    <link href='static/main/calendar/core/main.css' rel='stylesheet' />
+    <link href='static/main/calendar/daygrid/main.css' rel='stylesheet' />
+
+    <script src='static/main/calendar/core/main.js'></script>
+    <script src='static/main/calendar/daygrid/main.js'></script>
+
+{% endblock %}
+{% block main %}
+    <div id='calendar'></div>
+
+    <!-- Modal -->
+    <form class="m-5" action="{% url 'enroll' %}" method="post">
+      {% csrf_token %}
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Enroll</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            ...
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <input type="hidden" name="eventtitle" id="eventtitle" value=""/>
+            <input type="hidden" name="eventid" id="eventid" value=""/>
+            <button type="submit" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var calendarEl = document.getElementById('calendar');
+
+      var calendar = new FullCalendar.Calendar(calendarEl, {
+        plugins: [ 'interaction', 'dayGrid', 'timeGrid' ],
+        defaultView: 'dayGridMonth',
+        defaultDate: '2019-06-07',
+        header: {
+          left: 'prev,next today',
+          center: 'title',
+          right: 'dayGridMonth,dayGridWeek,dayGridDay'
+        },
+        selectable: true,
+
+        events: {
+
+            url:'/yourevents',
+            method: 'POST',
+            failure: function(){
+              alert('oops, error while fetching events');
+            }
+        },
+        eventClick: function(info){
+          var title = info.event.title;
+          var id = info.event.id;
+          $('#eventtitle').val(title);
+          $('#eventid').val(id);
+          $('#exampleModal').modal('show');
+        },
+});
+
+      calendar.render();
+    });
+
+    </script>
+
+{% endblock %}

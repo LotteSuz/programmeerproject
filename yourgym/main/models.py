@@ -10,8 +10,9 @@ class User(AbstractUser):
     tryout = models.CharField(max_length=200, null=True)
 
 class Event(models.Model):
+    id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=200)
-    start_time = models.DateTimeField()
+    start = models.DateTimeField()
     duration = models.IntegerField()
 
 class Stock(models.Model):
@@ -41,3 +42,14 @@ class CartItem(models.Model):
     cartowner = models.ForeignKey(Cart, on_delete=models.CASCADE, related_name='cart')
     price = models.DecimalField(decimal_places=2, max_digits=6, default=0)
     amount = models.IntegerField(default=1)
+
+class Order(models.Model):
+    user = models.CharField(max_length=64)
+    product_number = models.IntegerField(null=True, blank=True)
+    item = models.CharField(max_length=255, blank=True)
+    price = models.DecimalField(decimal_places=2, max_digits=6, default=0)
+    amount = models.IntegerField(default=1)
+
+class Participant(models.Model):
+    user = models.CharField(max_length=200)
+    session = models.ManyToManyField(Event, blank=True, related_name='participant')

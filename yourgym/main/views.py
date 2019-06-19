@@ -4,12 +4,24 @@ from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
 from django.contrib.auth.decorators import user_passes_test
 from datetime import datetime, timedelta, date
+import time
 from django.views import generic
 from django.utils.safestring import mark_safe
 import calendar
-
+from mollie.api.client import Client
+import os
 from .models import *
 from .utils import DocumentForm
+import flask
+from django.http import JsonResponse
+from django.forms.models import model_to_dict
+import json
+from django.core import serializers
+from django.views.decorators.csrf import csrf_exempt
+
+api_key = os.environ.get('MOLLIE_API_KEY', 'test_test')
+mollie_client = Client()
+mollie_client.set_api_key('test_TzprvAWd5Dg8xBGBbJstjJCg8x6mhy')
 
 # Create your views here.
 def index(request):
@@ -77,7 +89,38 @@ def cart(request):
         return render(request, "main/cart.html", context)
 
 def order(request):
-    return redirect('index')
+    curruser = request.user
+    usercart = Cart.objects.filter(owner=curruser).first()
+    orderitems = CartItem.objects.filter(cartowner=usercart).all()
+    my_webshop_id = int(time.time())
+    payment = mollie_client.payments.create({
+       'amount': {
+             'currency': 'EUR',
+             'value': '10.00'
+       },
+       'description': 'My first payment',
+       'webhookUrl': 'https://webshop.example.org/order/12345/',
+       'redirectUrl': request.build_absolute_uri(reverse("index")),
+       'metadata': {
+             'order_id': '12345'
+       }
+    })
+    for item in orderitems:
+        stockitem = Stock.objects.get(cart=item)
+        product_number = stockitem.product_number
+        itemname = stockitem.description
+        price = item.price
+        amount = item.amount
+        new = Order(user=curruser, product_number=product_number, item=itemname, price=price, amount=amount)
+        new.save()
+    CartItem.objects.filter(cartowner=usercart).delete()
+    return redirect(payment.checkout_url)
+
+def orders(request):
+    context = {
+        "orders": Order.objects.all()
+    }
+    return render(request, "main/orders.html", context)
 
 def schedule(request):
     context = {
@@ -129,10 +172,28 @@ def register(request):
         return render(request, "main/register.html", context)
 
 def timetable(request):
-    context = {
-        "workouts": Event.objects.all(),
-    }
-    return render(request, "main/timetable.html", context)
+    return render(request, "main/timetable.html")
+
+@csrf_exempt
+def events(request):
+    list = []
+    events = Event.objects.all()
+    for event in events:
+        dict = {"id": event.id, "title": event.title, "start": event.start}
+        list.append(dict)
+
+    return JsonResponse(list, safe=False)
+
+@csrf_exempt
+def yourevents(request):
+    curruser = request.user
+    list = []
+    events = Event.objects.filter(participant__user=curruser)
+    for event in events:
+        dict = {"id": event.id, "title": event.title, "start": event.start}
+        list.append(dict)
+
+    return JsonResponse(list, safe=False)
 
 def stock(request):
     if request.method == 'POST':
@@ -159,7 +220,24 @@ def login_view(request):
     else:
         return render(request, "main/login.html")
 
-
 def logout_view(request):
     logout(request)
     return render(request, "main/login.html", {"message": "Logged out."})
+
+def ordercomplete(request, user):
+    Order.objects.filter(user=user).delete()
+    return redirect("orders")
+
+def enroll(request):
+    curruser = request.user
+    groepsid = request.POST["eventid"]
+    eventobj = Event.objects.get(id=groepsid)
+    try:
+        part = Participant.objects.get(user=curruser)
+    except Participant.DoesNotExist:
+        participation = Participant(user=curruser)
+        participation.save()
+        part = Participant.objects.get(user=curruser)
+    part.session.add(eventobj)
+    part.save()
+    return redirect("index")
