@@ -35,3 +35,6 @@ Today I looked up documentation on how to display events in the calendar. I deci
 
 ## Day 12
 With help of Marijn I finally managed to display events in the calendar. After getting this to work, it was easier to implement other functions around the events. Members can now select a class, enroll for it, and see their personal overview of classes. There is still some finetuning to do, but the most important aspects of the calendar work now.
+
+## Day 13
+For me there were no major problems to be discussed at today's standup. I will make some changes to the module where personnel can monitor and confirm orders. 
