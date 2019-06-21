@@ -18,6 +18,8 @@ from django.forms.models import model_to_dict
 import json
 from django.core import serializers
 from django.views.decorators.csrf import csrf_exempt
+import random
+import string
 
 api_key = os.environ.get('MOLLIE_API_KEY', 'test_test')
 mollie_client = Client()
@@ -37,39 +39,48 @@ def cart(request):
     if request.method == "POST":
         prodnum = request.POST["productnumber"]
         item = Stock.objects.get(product_number=prodnum)
-        curruser = request.user
-        usercart = Cart.objects.filter(owner=curruser).first()
-        if usercart == None:
-            newcart = Cart(owner=curruser)
-            newcart.save()
-            newcartitem = CartItem(item=item, cartowner=newcart, price=item.price, amount=1)
-            newcartitem.save()
-        else:
-            cartitem = CartItem.objects.filter(cartowner=usercart, item=item).count()
-            if cartitem == 0:
-                newcartitem = CartItem(item=item, cartowner=usercart, price=item.price, amount=1)
+        if item.available != 0:
+            item.available -= 1
+            item.save()
+            curruser = request.user
+            usercart = Cart.objects.filter(owner=curruser).first()
+            if usercart == None:
+                newcart = Cart(owner=curruser)
+                newcart.save()
+                newcartitem = CartItem(item=item, cartowner=newcart, price=item.price, amount=1)
                 newcartitem.save()
             else:
-                currcartitem = CartItem.objects.filter(cartowner=usercart).get(item=item)
-                curramount = currcartitem.amount
-                newamount = int(curramount) + 1
-                currcartitem.amount = newamount
-                currcartitem.save()
+                cartitem = CartItem.objects.filter(cartowner=usercart, item=item).count()
+                if cartitem == 0:
+                    newcartitem = CartItem(item=item, cartowner=usercart, price=item.price, amount=1)
+                    newcartitem.save()
+                else:
+                    currcartitem = CartItem.objects.filter(cartowner=usercart).get(item=item)
+                    curramount = currcartitem.amount
+                    newamount = int(curramount) + 1
+                    currcartitem.amount = newamount
+                    currcartitem.save()
 
-        products = CartItem.objects.filter(cartowner=usercart).all()
-        total = 0
-        qty = 0
-        for product in products:
-            qty += product.amount
-            cost = product.amount * product.price
-            total += cost
-        context = {
-            "products": products,
-            "user": curruser,
-            "total": total,
-            "qty": qty
-        }
-        return render(request, "main/cart.html", context)
+            products = CartItem.objects.filter(cartowner=usercart).all()
+            total = 0
+            qty = 0
+            for product in products:
+                qty += product.amount
+                cost = product.amount * product.price
+                total += cost
+            context = {
+                "products": products,
+                "user": curruser,
+                "total": total,
+                "qty": qty
+            }
+            return render(request, "main/cart.html", context)
+        else:
+            context = {
+                "items": Stock.objects.all(),
+                "available": False
+            }
+            return render(request, "main/shop.html", context)
     else:
         curruser = request.user
         usercart = Cart.objects.filter(owner=curruser).first()
@@ -88,21 +99,28 @@ def cart(request):
         }
         return render(request, "main/cart.html", context)
 
+def randomString(stringLength=10):
+    """Generate a random string of letters and digits """
+    lettersAndDigits = string.ascii_letters + string.digits
+    return ''.join(random.choice(lettersAndDigits) for i in range(stringLength))
+
 def order(request):
     curruser = request.user
     usercart = Cart.objects.filter(owner=curruser).first()
     orderitems = CartItem.objects.filter(cartowner=usercart).all()
+    total = request.POST["usersorder"]
+    orderid = 'tr_' + randomString()
     my_webshop_id = int(time.time())
     payment = mollie_client.payments.create({
        'amount': {
              'currency': 'EUR',
-             'value': '10.00'
+             'value': total
        },
-       'description': 'My first payment',
+       'description': 'YourGym Webshop Order',
        'webhookUrl': 'https://webshop.example.org/order/12345/',
        'redirectUrl': request.build_absolute_uri(reverse("index")),
        'metadata': {
-             'order_id': '12345'
+             'order_id': orderid
        }
     })
     for item in orderitems:
@@ -111,7 +129,7 @@ def order(request):
         itemname = stockitem.description
         price = item.price
         amount = item.amount
-        new = Order(user=curruser, product_number=product_number, item=itemname, price=price, amount=amount)
+        new = Order(user=curruser, product_number=product_number, item=itemname, price=price, amount=amount, payment=orderid)
         new.save()
     CartItem.objects.filter(cartowner=usercart).delete()
     return redirect(payment.checkout_url)
@@ -197,7 +215,9 @@ def yourevents(request):
 
 def stock(request):
     if request.method == 'POST':
-        form = DocumentForm(request.POST, request.FILES, request.POST, request.POST, request.POST)
+        form = DocumentForm(request.POST, request.POST, request.FILES, request.POST, request.POST, request.POST)
+        print('hoi')
+        print(form)
         if form.is_valid():
             form.save()
             return redirect('shop')
@@ -241,3 +261,16 @@ def enroll(request):
     part.session.add(eventobj)
     part.save()
     return redirect("index")
+
+def members(request):
+    return render(request, "main/members.html")
+
+def payment(request):
+    curruser = request.user
+    order = Order.objects.filter(user=curruser).first()
+    paymentid = order.payment
+    print('payment')
+    print(paymentid)
+    status = mollie_client.payments.get(payment_id=paymentid).status
+    print(status)
+    return render(request, "main/shop.html")

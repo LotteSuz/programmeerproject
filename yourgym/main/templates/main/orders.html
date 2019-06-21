@@ -4,15 +4,14 @@
 {% block main %}
 
 {% regroup orders by user as user_list %}
-<table class="table table-dark">
   {% for user in user_list %}
+  <table class="table table-dark">
   <thead>
     <th> {{ user.grouper }} </th>
     <th> Product Number </th>
     <th> Item </th>
     <th> Price </th>
     <th> Amount </th>
-    <th> <a href="{% url 'ordercomplete' user.grouper %}">  Order Complete </a> </th>
   </thead>
   <tbody>
      {% for order in user.list %}
@@ -25,8 +24,37 @@
     </tr>
     {% endfor %}
   </tbody>
+  </table>
+  <form class="m-5" action="{% url 'ordercomplete' user.grouper %}" method="post">
+    {% csrf_token %}
+    <!-- Button trigger modal -->
+
+    <button type="button" action="{% url 'ordercomplete' user.grouper %}" method="post" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+      Confirm Order of {{user.grouper}}
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Confirm Order of {{user.grouper}}</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" name=usersorder value="{{user}}" class="btn btn-primary">Place Order</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </form>
   {% endfor %}
-</table>
+
 
 
 {% endblock %}

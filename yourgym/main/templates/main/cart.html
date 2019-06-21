@@ -4,6 +4,15 @@
 
 {% block main %}
 
+{% if qty == 0 %}
+<div class="container">
+  <div class="row" id="toprow">
+    <div id="indextitle" class="col-md-6 offset-md-1"> Your cart is empty </div>
+  </div>
+  <div class="row">
+    <div id="indextitle" class="col offset-md-1">
+      <a class="btn btn-outline-light" href="{% url 'shop'%}"> Continue Shopping </a>
+{% else %}
 <table class="table table-dark">
   <thead>
     <th> Item </th>
@@ -22,9 +31,11 @@
 </table>
 
 {% if qty != 0 %}
+
 <form class="m-5" action="{% url 'order' %}" method="post">
   {% csrf_token %}
   <!-- Button trigger modal -->
+  <a class="btn btn-outline-light" id="cartshop" href="{% url 'shop'%}"> Continue Shopping </a>
   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
     Place Order
   </button>
@@ -43,13 +54,15 @@
           Total price $ {{total}}
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Return</button>
-          <button type="submit" name=usersorder value="{{user}}" class="btn btn-primary">Place Order</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" name=usersorder value="{{total}}" class="btn btn-primary">Place Order</button>
         </div>
       </div>
     </div>
   </div>
 
 </form>
+
+{% endif %}
 {% endif %}
 {% endblock %}

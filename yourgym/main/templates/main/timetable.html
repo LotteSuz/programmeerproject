@@ -18,19 +18,18 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Enroll</h5>
+            <h5 class="modal-title" id="exampleModalLabel"></h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <div class="modal-body">
-            ...
+          <div id="bodytext" class="modal-body">
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             <input type="hidden" name="eventtitle" id="eventtitle" value=""/>
             <input type="hidden" name="eventid" id="eventid" value=""/>
-            <button type="submit" class="btn btn-primary">Save changes</button>
+            <button type="submit" class="btn btn-primary">Enroll</button>
           </div>
         </div>
       </div>
@@ -63,8 +62,15 @@
         eventClick: function(info){
           var title = info.event.title;
           var id = info.event.id;
+          var start = info.event.start;
+          var divhead = document.createElement("div");
+          divhead.innerHTML = title;
+          var divbody = document.createElement("div");
+          divbody.innerHTML = start;
           $('#eventtitle').val(title);
           $('#eventid').val(id);
+          document.getElementById("exampleModalLabel").appendChild(divhead);
+          document.getElementById("bodytext").appendChild(divbody);
           $('#exampleModal').modal('show');
         },
 });

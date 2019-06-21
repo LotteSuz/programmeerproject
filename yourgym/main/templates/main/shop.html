@@ -4,6 +4,14 @@
 
 {% block title %}{% endblock %}
 {% block main %}
+{% if available == False %}
+<div class="alert alert-light alert-dismissible fade show" role="alert">
+  <strong>This item is currently unavailable. </strong> Back in stock soon!
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+{% endif %}
 <form class="m-5" action="{% url 'cart' %}" method="post">
     {% csrf_token %}
 <div class="container">

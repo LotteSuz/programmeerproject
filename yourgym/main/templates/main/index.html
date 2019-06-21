@@ -15,7 +15,9 @@
       <a class="btn btn-outline-light" href="{% url 'schedule'%}"> YourSchedule </a>
       {% endif %}
       {% if user.is_superuser %}
+      <a class="btn btn-outline-light" href="{% url 'orders'%}"> Orders </a>
       <a class="btn btn-outline-light" href="{% url 'stock'%}"> Stock </a>
+      <a class="btn btn-outline-light" href="{% url 'members'%}"> Members </a>
       {% endif %}
       {% else %}
       <a class="btn btn-outline-light" href="{% url 'subscriptions'%}"> Subscriptions </a>

@@ -8,7 +8,7 @@ from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 class DocumentForm(forms.ModelForm):
     class Meta:
         model = Stock
-        fields = ('description', 'document', 'price', 'available', 'color' )
+        fields = ('product_number', 'description', 'document', 'price', 'available', 'color' )
 
 class CustomUserCreationForm(UserCreationForm):
     class Meta(UserCreationForm):

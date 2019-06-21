@@ -49,6 +49,7 @@ class Order(models.Model):
     item = models.CharField(max_length=255, blank=True)
     price = models.DecimalField(decimal_places=2, max_digits=6, default=0)
     amount = models.IntegerField(default=1)
+    payment = models.CharField(max_length=13)
 
 class Participant(models.Model):
     user = models.CharField(max_length=200)
