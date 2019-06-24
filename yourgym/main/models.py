@@ -4,10 +4,19 @@ from django.dispatch import receiver
 from django.contrib.auth.models import AbstractUser
 
 
+class Subscription(models.Model):
+    id = models.AutoField(primary_key=True)
+    title = models.CharField(max_length=200)
+    description = models.CharField(max_length=255, blank=True)
+    visual = models.ImageField(upload_to='images/', default=None)
+    price_month = models.DecimalField(decimal_places=2, max_digits=6, null=True, blank=True)
+    grouplessons = models.BooleanField(default=False)
+
 # Create your models here.
 class User(AbstractUser):
     lesson_access = models.BooleanField(default=False)
     tryout = models.CharField(max_length=200, null=True)
+    subscription = models.IntegerField(default=None, null=True)
 
 class Event(models.Model):
     id = models.AutoField(primary_key=True)
@@ -25,13 +34,6 @@ class Stock(models.Model):
 
     def __str__(self):
         return self.description
-
-class Subscription(models.Model):
-    title = models.CharField(max_length=200)
-    description = models.CharField(max_length=255, blank=True)
-    visual = models.ImageField(upload_to='images/', default=None)
-    price_month = models.DecimalField(decimal_places=2, max_digits=6, null=True, blank=True)
-    grouplessons = models.BooleanField(default=False)
 
 class Cart(models.Model):
     owner = models.CharField(max_length=64)

@@ -1,0 +1,24 @@
+{% extends "main/layout.html"%}
+
+{% block title %} Pending Orders {% endblock %}
+{% block main %}
+{% if status == 'paid' %}
+<div class="container">
+  <div class="row" id="toprow">
+    <div id="indextitle" class="col-md-6 offset-md-1"> Payment succesful </div>
+  </div>
+  <div class="row">
+    <div id="indextitle" class="col offset-md-1">
+      <a class="btn btn-outline-light" href="{% url 'shop'%}"> Continue Shopping </a>
+      <a class="btn btn-outline-light" href="{% url 'index'%}"> Return to the homepage </a>
+{% else %}
+<div class="container">
+  <div class="row" id="toprow">
+    <div id="indextitle" class="col-md-6 offset-md-1"> Your payment was unsuccesfull </div>
+  </div>
+  <div class="row">
+    <div id="indextitle" class="col offset-md-1">
+      <a class="btn btn-outline-light" href="{% url 'cart'%}"> Try again </a>
+      <a class="btn btn-outline-light" href="{% url 'index'%}"> Return to the homepage </a>
+{% endif %}
+{% endblock %}

@@ -9,7 +9,8 @@
 
 {% endblock %}
 {% block main %}
-    <div id='calendar'></div>
+  <h1 class="text-center"> Personal Schedule </h1>
+  <div id='calendar'></div>
 
     <!-- Modal -->
     <form class="m-5" action="{% url 'enroll' %}" method="post">
@@ -58,6 +59,7 @@
             method: 'POST',
             failure: function(){
               alert('oops, error while fetching events');
+
             }
         },
         eventClick: function(info){
@@ -67,6 +69,7 @@
           $('#eventid').val(id);
           $('#exampleModal').modal('show');
         },
+        eventColor: '#b974f2'
 });
 
       calendar.render();

@@ -4,6 +4,14 @@
 
 {% block title %}{% endblock %}
 {% block main %}
+{% if visitor == True %}
+<div class="alert alert-light alert-dismissible fade show" role="alert">
+You need to be logged in to shop.  <a href="{% url 'login_view'%}" class="alert-link">Login</a> or <a href="{% url 'subscriptions'%}" class="alert-link">Register</a>.
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+{% endif %}
 {% if available == False %}
 <div class="alert alert-light alert-dismissible fade show" role="alert">
   <strong>This item is currently unavailable. </strong> Back in stock soon!
@@ -17,7 +25,7 @@
 <div class="container">
   <div class="row">
     {% for item in items %}
-    <div class="col-4">
+    <div class="col-sm-12 col-md-6 col-lg-4">
       <img src="{{ item.document.url }}" width="200px" height="200px">
       <br> <br> <br>
       <a class="descr"> {{item.description}} <a>

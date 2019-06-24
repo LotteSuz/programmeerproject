@@ -12,10 +12,12 @@ body {
   position: absolute;
   bottom: 0;
   right: 0;
+  max-width: 100%;
+  height: auto;
 }
 
 .container #toprow {
-  padding-top: 250px;
+  padding-top: 25%;
 }
 .container #toprow #indextitle {
   font-size: 60px;

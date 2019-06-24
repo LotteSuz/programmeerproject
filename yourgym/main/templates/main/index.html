@@ -8,22 +8,22 @@
   </div>
   <div class="row">
     <div id="indextitle" class="col offset-md-1">
-      {% if user.is_authenticated %}
-      <a class="btn btn-outline-light" href="{% url 'shop'%}"> Shop </a>
-      {% if user.lesson_access %}
-      <a class="btn btn-outline-light" href="{% url 'timetable'%}"> Timetable </a>
-      <a class="btn btn-outline-light" href="{% url 'schedule'%}"> YourSchedule </a>
-      {% endif %}
       {% if user.is_superuser %}
       <a class="btn btn-outline-light" href="{% url 'orders'%}"> Orders </a>
       <a class="btn btn-outline-light" href="{% url 'stock'%}"> Stock </a>
       <a class="btn btn-outline-light" href="{% url 'members'%}"> Members </a>
       {% endif %}
-      {% else %}
-      <a class="btn btn-outline-light" href="{% url 'subscriptions'%}"> Subscriptions </a>
+      {% if user.lesson_access %}
+      <a class="btn btn-outline-light" href="{% url 'timetable'%}"> Grouplessons </a>
+      <a class="btn btn-outline-light" href="{% url 'schedule'%}"> YourSchedule </a>
+      {% endif %}
+      {% if user.is_authenticated %}
+      <a class="btn btn-outline-light" href="{% url 'shop'%}"> Shop </a>
       {% endif %}
     </div>
   </div>
 </div>
-<img src="static/main/kettlebell.png" id="kettlebell">
+<div id="kettlebell">
+<img src="static/main/kettlebell.png">
+</div>
 {% endblock %}

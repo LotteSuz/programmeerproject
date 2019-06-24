@@ -20,5 +20,5 @@ urlpatterns = [
     path("enroll", views.enroll, name="enroll"),
     path("yourevents", views.yourevents, name="yourevents"),
     path("members", views.members, name="members"),
-    path("payment", views.payment, name="payment"),
+    path("payment/<int:userid>", views.payment, name="payment"),
 ]
