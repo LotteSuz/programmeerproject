@@ -38,3 +38,14 @@ With help of Marijn I finally managed to display events in the calendar. After g
 
 ## Day 13
 For me there were no major problems to be discussed at today's standup. I will make some changes to the module where personnel can monitor and confirm orders. 
+
+## Day 14
+Though my product was not completely finished yet, I let someone test my webapplication thoroughly which led us to find a bug in the form where personnel can add new items to the stock. Overall I got positive feedback for my app, the major aspect to focus on for the coming week is finishing up the webshop payment for which I need to create a landing page, and to test again for bugs.
+
+## Day 15
+I spend today on finishing the payment procedure, now different payment statuses are handled accordingly, in case payment did not succeed, users can choose to be redirected to their shoppingcart and try again. I ran into some bugs regarding the authentication system of django, which were the result of having a custom user model, which I fixed.
+
+## Day 16
+Today I tested my application thoroughly myself, and let some family members use it as well. This did not result in errors or problems, so I went on to cleaning up my code, adding some comments and checking for style.
+
+## Day 17
