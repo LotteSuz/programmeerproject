@@ -25,8 +25,18 @@ Last, the (Your)Events functions play a central role in rendering the calendars.
 
 
 ## Development
-Important changes in the 
-• personell cant check who enrolled for classes
-• cant order with guest account
-• cant unsubscribe
-• non group subscr cant see the timetable
+Important changes in the features of this webapplication largely include changes to the calendar functionality, furthermore the webshop underwent some adjustments as well.
+
+### Calendar
+The first diversion from the original proposal regarding the calendar, is that members who have a subscription without access to grouplessons can not view the schedule at all. Originally, I planned on discriminating between subscriptions only after members requested to enroll for a class, however I decided to deny them access to the schedule at all. Designwise I thought this would make more sense because someone who chooses to subscribe for a non-group lessons programme, has no benefit in having access to the schedule at all. 
+
+Members with access to the grouplessons can enroll for classes, but in constrast to the original proposal can not unsubscribe for grouplessons they enrolled for. This was a time-related decision; implementing this feature would be largely alike implementing the option to enroll for classes, therefore I chose to focus on other more distinct features of the web application.
+
+Lastly for the calendar, it is not possible for personnel to check which members are enrolled for certain grouplessons. This decision was mainly due to changing to a different framework for the calendar function during the project, which costed a lot of time. This feature was the final one I planned for the calendar function and because I had spend so much time to this already, compared to other even so important aspects of the web application, I decided to not implement this after all. Others I discussed this with agreed that it would have been nice to add this feature to the calendar, but they also recognized the improvement to the other calendar functions which resulted from choosing a different calendar framework, which let me to conclude that this is a reasonable tradeoff to make.
+
+### Webshop
+For the webshop there is an adjustment in functionality for users who are not a member of YourGym. Though they can visit the webshop, they will be prompted to login or register as soon as they try to add an item to their shopping cart. This decision was largely based on time-constraints, but also because I came across some other more interesting features to add to the webshop. I discussed this with others who agreed that the other functions, which will be discussed next, were to be prioritized over the current one.
+
+One of the extra features for the webshop, is the generation of a payment through the services of Mollie, which is a legitimate payment handler which can be used in testmode, as I did for the current project. When placing an order, the user is redirected to the mollie interface where they can indicate the status of their payment. If the payment succeeds, their order will be finalized, otherwise they have the option to return to their shoppingcart and try again. Someone else suggested using mollie and already while implementing I myself and others who gave feedback were very enthusiastic about this feature, because it is very real and instantly makes the webshop look like a real one.
+
+Lastly, personnel can add new items to the website through a form on the website. Though this would also be possible through the django user admin, I wanted to gain some experience in using DocumentForms and uploading images to a website. Furthermore, it is more user friendly for the user to do this via the website since this interface can be adjusted and users are redirected to the webshop after adding a new item, which makes the process outcome instantly visible. Unfortunately, I did not have time to enable this for all information personnel might want to update, such as grouplessons for the calendar which still need to be added through the admin. Ideally I would implement this functionality for all models (where needed) and include an option to remove or adjust objects.
