@@ -6,6 +6,18 @@ This webapplication was created as a final project for the minor in programming 
 
 [index]: https://github.com/LotteSuz/programmeerproject/blob/master/images/readme_index.png "Index page"
 
+![alt text][calendar]
+
+[calendar]: https://github.com/LotteSuz/programmeerproject/blob/master/images/readme_group.png "Index page"
+
+![alt text][shop]
+
+[shop]: https://github.com/LotteSuz/programmeerproject/blob/master/images/readme_shop.png "Index page"
+
+![alt text][mollie]
+
+[mollie]: https://github.com/LotteSuz/programmeerproject/blob/master/images/readme_mollie.png "Index page"
+
 
 ## Getting started
 ### Prerequisites
