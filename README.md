@@ -43,4 +43,4 @@ python3 manage.py runserver
 ## Acknowledgements
 • Minor Programming - University of Amsterdam \
 • Django \
-• FullCalendar
+• [Full Calendar](https://github.com/fullcalendar/fullcalendar)
