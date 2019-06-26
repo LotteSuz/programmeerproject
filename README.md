@@ -36,6 +36,8 @@ To run this webapplication, in your terminal navigate to the yourgym folder and 
 ```python
 python3 manage.py runserver
 ```
+### Product Video
+A video walkthrough of this webapplication can be found on [youtube](https://www.youtube.com/watch?v=1YuQnHcg4eo&feature=youtu.be)
 
 ## Authors
 • Lotte Heek
