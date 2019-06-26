@@ -1,14 +1,14 @@
+# Report Final Project Web Application
 
-__• Subscriptions__ Members can select the preferred of 2 subscriptions and are redirected to registration.
+This webapplication was created as a final project for the minor in programming at the University of Amsterdam. YourGym is a fictional gym, and its web application's core functionalities are for future members to subscribe and for members to enroll for group lessons and to order items from the webshop. Personnel is granted some extra features, such as uploading new items to the webshop and monitoring current memberships.
 
-__• Register__ Users are able to register for 2 different kinds of subscriptions.
+![alt text][index]
 
-__• Members__ Personnel can browse the memberbase, __check out which members enrolled for classes__ and see pending orders.
+[index]: https://github.com/LotteSuz/programmeerproject/blob/master/images/readme_index.png "Index page"
 
-__• Login/Logout__ Members can login to get access to enrolling for classes and their shoppingcart, and logout.
-
-__• Webshop__ The webshop is available to members as well as visitors __who can order with a guest account__. Personnel can edit the amount of stock available for purchase.
-
-__• Timetable__ Personnel can add classes to the schedule, which can be viewed by all members.
-
-__• (Un)Subscribe for classes__ Members with a subscription for group lessons can enroll for classes, and __unsubscribe if needed__. Members with a __non-group subscription can view the timetable, but not enroll for classes.__
+## Technical Design
+## Development
+• personell cant check who enrolled for classes
+• cant order with guest account
+• cant unsubscribe
+• non group subscr cant see the timetable
