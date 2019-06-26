@@ -24,6 +24,6 @@ python3 manage.py runserver
 • Lotte Heek
 
 ## Acknowledgements
-• Minor Programming - University of Amsterdam
-• Django
-• FullCalendar
+• Minor Programming - University of Amsterdam \
+• Django \
+• FullCalendar \
